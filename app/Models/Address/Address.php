@@ -9,12 +9,6 @@ class Address extends Model
 {
     protected $fillable = [
         'coordinates',
-        'location_id',
         'full_address',
     ];
-
-    public function location(): BelongsTo
-    {
-        return $this->belongsTo(Location::class);
-    }
 }

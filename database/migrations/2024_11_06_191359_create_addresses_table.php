@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('location_id')->constrained('locations');
             $table->string('full_address');
             $table->timestamps();
         });

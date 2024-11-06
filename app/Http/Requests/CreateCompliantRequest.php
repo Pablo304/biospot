@@ -24,7 +24,6 @@ class CreateCompliantRequest extends FormRequest
         return [
             'description' => 'required',
             'address.coordinates' => 'nullable',
-            'address.location_id' => 'nullable',
             'address.full_address' => 'nullable',
         ];
     }
