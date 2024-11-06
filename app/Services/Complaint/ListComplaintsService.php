@@ -18,6 +18,13 @@ class ListComplaintsService implements Contracts\ListComplaintsServiceContract
      */
     public function execute(): mixed
     {
-        return $this->complaint->get();
+        return $this->complaint
+            ->whereHas('processInfo', function ($query) {
+                $query->where('user_id', auth()->user()->id);
+            })
+            ->orWhereHas('organizations', function ($query){
+                $query->where('organization_id', auth()->user()->organization_id);
+            })
+            ->get();
     }
 }
