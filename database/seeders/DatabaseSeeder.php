@@ -19,8 +19,7 @@ class DatabaseSeeder extends Seeder
             RelationTypeSeeder::class,
             StatusSeeder::class,
             ComplaintSeeder::class,
-            PlagueStatusSeeder::class,
-            PlagueTypeSeeder::class
+            PlagueStatusSeeder::class
         ]);
     }
 }
