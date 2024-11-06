@@ -21,6 +21,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::get('/', [ComplaintController::class, 'index'])->name('complaint.index');
         Route::get('/{compliant}', [ComplaintController::class, 'show'])->name('complaint.show');
         Route::post('/{compliant}/discard', [ComplaintController::class, 'discard'])->name('complaint.discard');
+        Route::post('/{compliant}/confirm', [ComplaintController::class, 'confirm'])->name('complaint.confirm');
     });
     Route::prefix('plague')->group(function () {
         Route::get('/plague-status', [PlagueStatusController::class, 'index']);

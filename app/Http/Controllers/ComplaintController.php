@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ConfirmComplaintRequest;
 use App\Http\Resources\ComplaintResource;
 use App\Models\Complaint;
+use App\Services\Complaint\Contracts\ConfirmComplaintServiceContract;
 use App\Services\Complaint\Contracts\DiscardComplaintServiceContract;
 use App\Services\Complaint\Contracts\ListComplaintsServiceContract;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -32,6 +34,17 @@ class ComplaintController extends Controller
         try {
             $discardComplaintService->execute($compliantId);
             return true;
+        } catch (ModelNotFoundException $exception) {
+            Log::error($exception->getMessage());
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+        }
+    }
+
+    public function confirm(int|string $compliantId, ConfirmComplaintRequest $request, ConfirmComplaintServiceContract $confirmComplaintService)
+    {
+        try {
+            return $confirmComplaintService->execute($compliantId, $request);
         } catch (ModelNotFoundException $exception) {
             Log::error($exception->getMessage());
         } catch (\Exception $exception) {
