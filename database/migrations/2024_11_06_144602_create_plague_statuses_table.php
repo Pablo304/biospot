@@ -7,18 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('complaints', function (Blueprint $table) {
+        Schema::create('plague_statuses', function (Blueprint $table) {
             $table->id();
-            $table->date('started_at');
-            $table->foreignId('plague_id');
-            $table->string('finished_at')->nullable();
-            $table->foreignId('created_by');
+            $table->string('name');
+            $table->string('slug')->nullable()->default(null);
+            $table->string('color')->nullable()->default(null);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('complaints');
+        Schema::dropIfExists('plague_statuses');
     }
 };

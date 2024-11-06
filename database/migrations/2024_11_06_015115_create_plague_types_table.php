@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable()->default(null);
+            $table->boolean('is_public')->default(true);
             $table->timestamps();
         });
     }
