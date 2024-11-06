@@ -8,6 +8,7 @@ use App\Models\Suspect\Suspect;
 use App\Services\Suspect\Contracts\ConfirmSuspectServiceContract;
 use App\Services\Suspect\Contracts\DiscardSuspectServiceContract;
 use App\Services\Suspect\Contracts\ListSuspectServiceContract;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 
@@ -31,23 +32,24 @@ class SuspectController extends Controller
     public function discard(int|string $suspectId, DiscardSuspectServiceContract $discardSuspectService)
     {
         try {
-            $discardSuspectService->execute($suspectId);
-            return true;
-        } catch (ModelNotFoundException $exception) {
-            Log::error($exception->getMessage());
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
+            return self::successResponse(
+                data:$discardSuspectService->execute($suspectId),
+                message: ('Suspeita descartada com sucesso.')
+            );
+        } catch (Exception $exception) {
+            return self::returnError($exception);
         }
     }
 
     public function confirm(int|string $suspectId, ConfirmSuspectRequest $request, ConfirmSuspectServiceContract $confirmSuspectService)
     {
         try {
-            return $confirmSuspectService->execute($suspectId, $request);
-        } catch (ModelNotFoundException $exception) {
-            Log::error($exception->getMessage());
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
+            return self::successResponse(
+                data: $confirmSuspectService->execute($suspectId, $request),
+                message: ('Suspeita confirmada com sucesso.')
+            );
+        } catch (Exception $exception) {
+            return self::returnError($exception);
         }
     }
 }

@@ -19,6 +19,8 @@ class ListSuspectService implements ListSuspectServiceContract
      */
     public function execute(): mixed
     {
-        return $this->suspect->get();
+        return $this->suspect
+            ->orderBy('id', 'desc')
+            ->get();
     }
 }
