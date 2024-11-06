@@ -27,6 +27,9 @@ refresh:
 	make composer-dump
 	make clear
 
+php:
+	@docker compose exec -it php-fpm /bin/bash
+
 lib ?=
 composer-require: ## Instala uma nova lib utilizando o composer
 ifdef lib
