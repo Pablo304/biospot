@@ -19,11 +19,15 @@ class LoginService implements Contract\LoginServiceContract
         if (!$user || !Hash::check($request['password'], $user->password)) {
             throw new UnauthorizedHttpException('', 'Usuário ou senha inválidos.');
         }
-
-        return $user->createToken(
+        $accessToken = $user->createToken(
             name: 'user_token',
             abilities: []
-        )->plainTextToken;
+        );
+        return [
+            'name' => $user->name,
+            'access_token' => $accessToken->plainTextToken,
+            'abilities' => $accessToken->accessToken->abilities
+        ];
 
     }
 }

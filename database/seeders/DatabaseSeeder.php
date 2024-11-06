@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ComplaintSeeder::class,
             PlagueStatusSeeder::class,
             AddPlagueTypeSeeder::class,
+            UsersSeeder::class
         ]);
     }
 }
