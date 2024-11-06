@@ -11,11 +11,15 @@ use App\Services\Complaint\Contracts\StoreCompliantServiceContract;
 use App\Services\Complaint\DiscardComplaintService;
 use App\Services\Plague\Contracts\CreatePlagueServiceContract;
 use App\Services\Complaint\StoreCompliantService;
+use App\Services\Plague\Contracts\ListPlagueServiceContract;
 use App\Services\Plague\Contracts\ListPlagueStatusServiceContract;
 use App\Services\Plague\Contracts\ListPlagueTypesServiceContract;
+use App\Services\Plague\Contracts\ResolvePlagueServiceContract;
 use App\Services\Plague\CreatePlagueService;
+use App\Services\Plague\ListPlagueService;
 use App\Services\Plague\ListPlagueStatusService;
 use App\Services\Plague\ListPlagueTypesService;
+use App\Services\Plague\ResolvePlagueService;
 use App\Services\ProcessInfo\Contracts\CreateProcessInfoServiceContract;
 use App\Services\ProcessInfo\CreateProcessInfoService;
 use App\Services\Status\Contracts\ListStatusServiceContract;
@@ -90,6 +94,8 @@ class ServiceLayerProvider extends ServiceProvider
     {
         $this->app->bind(ListPlagueTypesServiceContract::class, ListPlagueTypesService::class);
         $this->app->bind(CreatePlagueServiceContract::class, CreatePlagueService::class);
+        $this->app->bind(ListPlagueServiceContract::class, ListPlagueService::class);
+        $this->app->bind(ResolvePlagueServiceContract::class, ResolvePlagueService::class);
     }
 
     /**

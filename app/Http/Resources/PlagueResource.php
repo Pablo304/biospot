@@ -18,6 +18,11 @@ class PlagueResource extends JsonResource
             'id' => $this->id,
             'name' => $this->plagueType->name,
             'description' => $this->processInfo->description,
+            'status' => [
+                'name' => $this->status->name,
+                'slug' => $this->status->slug,
+                'color' => $this->status->color,
+            ],
             'is_public' => $this->plagueType->is_public,
             'actions' => auth()->user()->organization_id ? $this->organizations->map(function ($item) {
                 return $item->pivot

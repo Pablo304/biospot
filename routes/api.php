@@ -37,7 +37,9 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('plague')->group(function () {
+        Route::get('/', [PlagueController::class, 'index'])->name('plague.index');
         Route::post('/', [PlagueController::class, 'store'])->name('plague.store');
+        Route::post('/{plague}/resolve', [PlagueController::class, 'resolve'])->name('plague.store');
         Route::get('/plague-status', [PlagueStatusController::class, 'index']);
         Route::get('/plague-types', [PlagueTypeController::class, 'index'])->name('plague.types');
     });

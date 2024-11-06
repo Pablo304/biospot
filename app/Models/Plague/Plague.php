@@ -51,4 +51,9 @@ class Plague extends Model
     {
         return $this->belongsTo(PlagueType::class);
     }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(PlagueStatus::class, 'plague_status_id');
+    }
 }
