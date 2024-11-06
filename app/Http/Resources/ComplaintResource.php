@@ -19,7 +19,10 @@ class ComplaintResource extends JsonResource
             'id' => $this->id,
             'started_at' => $this->started_at,
             'finished_at' => $this->finished_at,
-            'status' => $this->status->name,
+            'status' => [
+                'name' => $this->status->name,
+                'color' => $this->status->color,
+            ],
             'process_info' => new ProcessInfoResource($this->processInfo),
             'actions' => $this->organizations->map(function ($item) {
                 return $item->pivot->where('organization_id', 1)->first()->relation_type;
