@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Plague;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class PlagueStatus extends Model
 {
-    protected $table = 'statuses';
     protected $fillable = [
         'name',
-        'color',
         'slug',
+        'color',
     ];
 }
