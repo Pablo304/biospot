@@ -30,7 +30,7 @@ class ComplaintResource extends JsonResource
                     ->where('organization_id', auth()->user()->organization_id)
                     ->where('complaint_id', $this->id)
                     ->first()->relation_type;
-            })->first() : null
+            })->first() : 'observer'
         ];
     }
 }
