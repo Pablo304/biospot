@@ -43,7 +43,10 @@ class PlagueController extends Controller
                 'relation_type' => 'executor'
             ]);
             DB::commit();
-            return new PlagueResource($plague->fresh());
+            return self::successResponse(
+                data: new PlagueResource($plague->fresh()),
+                message: ('Praga registrada com sucesso.')
+            );
         } catch (\Exception $exception) {
             DB::rollBack();
             return response()->json([
