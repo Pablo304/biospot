@@ -34,6 +34,10 @@ class ServiceLayerProvider extends ServiceProvider
             'App\Services\Complaint\Contracts\ListComplaintsServiceContract',
             'App\Services\Complaint\ListComplaintsService'
         );
+        $this->app->bind(
+            'App\Services\Auth\Contract\LoginServiceContract',
+            'App\Services\Auth\LoginService'
+        );
     }
 
     /**
