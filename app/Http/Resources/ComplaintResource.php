@@ -21,6 +21,7 @@ class ComplaintResource extends JsonResource
             'finished_at' => $this->finished_at,
             'status' => [
                 'name' => $this->status->name,
+                'slug' => $this->status->slug,
                 'color' => $this->status->color,
             ],
             'process_info' => new ProcessInfoResource($this->processInfo),

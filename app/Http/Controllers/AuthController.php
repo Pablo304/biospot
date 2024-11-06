@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 
@@ -19,12 +20,12 @@ class AuthController extends Controller
     public function login(LoginRequest $request, LoginServiceContract $loginService)
     {
         try {
-//            return $this->loginService->execute($request);
-//            dd($loginService->execute($request));
             return new LoginResource($loginService->execute($request));
 
         } catch (UnauthorizedHttpException $exception) {
-            return $exception->getMessage();
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ], Response::HTTP_UNAUTHORIZED);
         } catch (Exception $exception) {
             return $exception->getMessage();
         }
