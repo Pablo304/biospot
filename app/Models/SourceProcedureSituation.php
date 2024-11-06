@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SourceProcedureSituation extends Model
 {
+    protected $table = 'source_procedure_situations';
     protected $fillable = [
         'source_procedure_id',
         'source_situation_id',
