@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\PlagueController;
 use App\Http\Controllers\PlagueStatusController;
 use App\Http\Controllers\PlagueTypeController;
 use App\Http\Controllers\StatusController;
@@ -36,6 +37,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('plague')->group(function () {
+        Route::post('/', [PlagueController::class, 'store'])->name('plague.store');
         Route::get('/plague-status', [PlagueStatusController::class, 'index']);
         Route::get('/plague-types', [PlagueTypeController::class, 'index'])->name('plague.types');
     });

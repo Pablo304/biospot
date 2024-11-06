@@ -2,7 +2,11 @@
 
 namespace App\Models\Plague;
 
+use App\Models\Organization;
+use App\Models\ProcessInfo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Plague extends Model
 {
@@ -22,4 +26,29 @@ class Plague extends Model
     protected $casts = [
         'is_public' => 'boolean'
     ];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function organizations(): BelongsToMany
+    {
+        return $this->belongsToMany(Organization::class, 'plague_organizations')
+            ->withPivot('relation_type');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function processInfo(): BelongsTo
+    {
+        return $this->belongsTo(ProcessInfo::class);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function plagueType(): BelongsTo
+    {
+        return $this->belongsTo(PlagueType::class);
+    }
 }

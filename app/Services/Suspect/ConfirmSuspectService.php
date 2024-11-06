@@ -50,7 +50,6 @@ class ConfirmSuspectService implements Contracts\ConfirmSuspectServiceContract
             throw new ModelNotFoundException(__('messages.errors.model_not_found'));
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception->getMessage());
             throw $exception;
         }
     }

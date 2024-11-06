@@ -16,6 +16,8 @@ use App\Services\Plague\Contracts\ListPlagueTypesServiceContract;
 use App\Services\Plague\CreatePlagueService;
 use App\Services\Plague\ListPlagueStatusService;
 use App\Services\Plague\ListPlagueTypesService;
+use App\Services\ProcessInfo\Contracts\CreateProcessInfoServiceContract;
+use App\Services\ProcessInfo\CreateProcessInfoService;
 use App\Services\Status\Contracts\ListStatusServiceContract;
 use App\Services\Status\ListStatusService;
 use App\Services\Suspect\ConfirmSuspectService;
@@ -51,6 +53,7 @@ class ServiceLayerProvider extends ServiceProvider
         $this->bootPlague();
         $this->bootSuspect();
         $this->bootAddress();
+        $this->bootProcessInfo();
     }
 
     /**
@@ -107,5 +110,13 @@ class ServiceLayerProvider extends ServiceProvider
     private function bootAddress(): void
     {
         $this->app->bind(CreateAddressServiceContract::class, CreateAddressService::class);
+    }
+
+    /**
+     * @return void
+     */
+    private function bootProcessInfo(): void
+    {
+        $this->app->bind(CreateProcessInfoServiceContract::class, CreateProcessInfoService::class);
     }
 }
