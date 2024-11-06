@@ -9,17 +9,31 @@ use App\OrganizationEnum;
 use App\PlagueStatusEnum;
 use App\Services\Address\Contracts\CreateAddressServiceContract;
 use App\Services\Plague\Contracts\CreatePlagueServiceContract;
+use App\Services\Plague\Contracts\ListPlagueServiceContract;
+use App\Services\Plague\Contracts\ResolvePlagueServiceContract;
 use App\Services\ProcessInfo\Contracts\CreateProcessInfoServiceContract;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\Response;
 
 class PlagueController extends Controller
 {
+    public function index(ListPlagueServiceContract $listPlagueService): JsonResponse
+    {
+        try {
+            return self::successResponse(
+                data: PlagueResource::collection($listPlagueService->execute()),
+                message: ('Pragas encontradas com sucesso.')
+            );
+        } catch (\Exception $exception) {
+            return self::internalServerErrorResponse($exception);
+        }
+    }
+
     public function store(CreatePlagueRequest              $request,
                           CreatePlagueServiceContract      $createPlagueService,
                           CreateProcessInfoServiceContract $createProcessInfoService,
-                          CreateAddressServiceContract     $createAddressService)
+                          CreateAddressServiceContract     $createAddressService): JsonResponse
     {
         try {
             DB::beginTransaction();
@@ -49,9 +63,22 @@ class PlagueController extends Controller
             );
         } catch (\Exception $exception) {
             DB::rollBack();
-            return response()->json([
-                'message' => $exception->getMessage()
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return self::internalServerErrorResponse($exception);
+        }
+    }
+
+    public function resolve(int|string $plagueId, ResolvePlagueServiceContract $resolvePlagueService): JsonResponse
+    {
+        try {
+            $resolvePlagueService->execute($plagueId);
+            return self::successResponse(
+                data: [],
+                message: 'Praga resolvida com sucesso.'
+            );
+        } catch (ModelNotFoundException $exception) {
+            return self::modelNotFoundResponse($exception);
+        } catch (\Exception $exception) {
+            return self::internalServerErrorResponse($exception);
         }
     }
 }
