@@ -8,10 +8,13 @@ class Plague extends Model
 {
     protected $table = 'plagues';
     protected $fillable = [
-        'name',
-        'description',
-        'is_public',
+        'plague_type_id',
+        'suspect_id',
+        'process_info_id',
+        'plague_status_id',
     ];
+
+    public $timestamps = false;
 
     /**
      * @var string[]
