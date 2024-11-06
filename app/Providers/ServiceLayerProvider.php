@@ -6,14 +6,22 @@ use App\Services\Complaint\ConfirmComplaintService;
 use App\Services\Complaint\Contracts\ConfirmComplaintServiceContract;
 use App\Services\Complaint\Contracts\DiscardComplaintServiceContract;
 use App\Services\Complaint\DiscardComplaintService;
+use App\Services\Plague\Contracts\CreatePlagueServiceContract;
 use App\Services\Plague\Contracts\ListPlagueStatusServiceContract;
 use App\Services\Plague\Contracts\ListPlagueTypesServiceContract;
+use App\Services\Plague\CreatePlagueService;
 use App\Services\Plague\ListPlagueStatusService;
 use App\Services\Plague\ListPlagueTypesService;
 use App\Services\Status\Contracts\ListStatusServiceContract;
 use App\Services\Status\ListStatusService;
+use App\Services\Suspect\ConfirmSuspectService;
+use App\Services\Suspect\Contracts\ConfirmSuspectServiceContract;
 use App\Services\Suspect\Contracts\CreateSuspectServiceContract;
+use App\Services\Suspect\Contracts\DiscardSuspectServiceContract;
+use App\Services\Suspect\Contracts\ListSuspectServiceContract;
 use App\Services\Suspect\CreateSuspectService;
+use App\Services\Suspect\DiscardSuspectService;
+use App\Services\Suspect\ListSuspectService;
 use Illuminate\Support\ServiceProvider;
 
 class ServiceLayerProvider extends ServiceProvider
@@ -70,6 +78,7 @@ class ServiceLayerProvider extends ServiceProvider
     private function bootPlague(): void
     {
         $this->app->bind(ListPlagueTypesServiceContract::class, ListPlagueTypesService::class);
+        $this->app->bind(CreatePlagueServiceContract::class, CreatePlagueService::class);
     }
 
     /**
@@ -78,5 +87,8 @@ class ServiceLayerProvider extends ServiceProvider
     private function bootSuspect(): void
     {
         $this->app->bind(CreateSuspectServiceContract::class, CreateSuspectService::class);
+        $this->app->bind(ConfirmSuspectServiceContract::class, ConfirmSuspectService::class);
+        $this->app->bind(DiscardSuspectServiceContract::class, DiscardSuspectService::class);
+        $this->app->bind(ListSuspectServiceContract::class, ListSuspectService::class);
     }
 }

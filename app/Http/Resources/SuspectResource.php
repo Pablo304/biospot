@@ -16,7 +16,17 @@ class SuspectResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            ''
+            'complaint' => new ComplaintResource($this->complaint),
+            'status' => [
+                'name' => $this->status->name,
+                'slug' => $this->status->slug,
+                'color' => $this->status->color,
+            ],
+            'notes' => $this->notes,
+            'process_info' => new ProcessInfoResource($this->processInfo),
+            'actions' => $this->organizations->map(function ($item) {
+                return $item->pivot->where('organization_id', 1)->first()->relation_type;
+            })->first()
         ];
     }
 }
