@@ -23,6 +23,9 @@ class ComplaintController extends Controller
             return ComplaintResource::collection($listComplaintsService->execute());
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
+            return response()->json([
+                'message' => $exception->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
