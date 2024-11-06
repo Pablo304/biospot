@@ -10,7 +10,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+Route::prefix('v1')->group(function () {
 
     Route::prefix('auth')->group(function () {
         Route::post('login', [AuthController::class, 'login'])->withoutMiddleware('auth:sanctum');
@@ -21,5 +21,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::get('/{compliant}', [ComplaintController::class, 'show'])->name('complaint.show');
         Route::get('/status', [StatusController::class, 'index'])->name('status.index');
         Route::post('/{compliant}', [ComplaintController::class, 'discard'])->name('complaint.discard');
+        Route::post('/store', [ComplaintController::class, 'store'])->name('complaint.store');
     });
 });
