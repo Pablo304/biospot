@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Services\Address\Contracts\CreateAddressServiceContract;
+use App\Services\Address\CreateAddressService;
 use App\Services\Complaint\ConfirmComplaintService;
 use App\Services\Complaint\Contracts\ConfirmComplaintServiceContract;
 use App\Services\Complaint\Contracts\DiscardComplaintServiceContract;
+use App\Services\Complaint\Contracts\StoreCompliantServiceContract;
 use App\Services\Complaint\DiscardComplaintService;
+use App\Services\Complaint\StoreCompliantService;
 use App\Services\Plague\Contracts\ListPlagueStatusServiceContract;
 use App\Services\Plague\Contracts\ListPlagueTypesServiceContract;
 use App\Services\Plague\ListPlagueStatusService;
@@ -36,6 +40,7 @@ class ServiceLayerProvider extends ServiceProvider
         $this->bootStatus();
         $this->bootPlague();
         $this->bootSuspect();
+        $this->bootAddress();
     }
 
     /**
@@ -53,6 +58,7 @@ class ServiceLayerProvider extends ServiceProvider
             'App\Services\Auth\LoginService'
         );
         $this->app->bind(ConfirmComplaintServiceContract::class, ConfirmComplaintService::class);
+        $this->app->bind(StoreCompliantServiceContract::class, StoreCompliantService::class);
     }
 
     /**
@@ -78,5 +84,13 @@ class ServiceLayerProvider extends ServiceProvider
     private function bootSuspect(): void
     {
         $this->app->bind(CreateSuspectServiceContract::class, CreateSuspectService::class);
+    }
+
+    /**
+     * @return void
+     */
+    private function bootAddress(): void
+    {
+        $this->app->bind(CreateAddressServiceContract::class, CreateAddressService::class);
     }
 }

@@ -9,5 +9,7 @@ class ProcessInfo extends Model
     protected $table = 'process_infos';
     protected $fillable = [
         'description',
+        'user_id',
+        'address_id',
     ];
 }
