@@ -10,11 +10,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::prefix('auth')->group(function () {
-    Route::post('login', [AuthController::class, 'login']);
-});
-
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+
+    Route::prefix('auth')->group(function () {
+        Route::post('login', [AuthController::class, 'login'])->withoutMiddleware('auth:sanctum');
+    });
+
     Route::prefix('complaints')->group(function () {
         Route::get('/', [ComplaintController::class, 'index'])->name('complaint.index');
         Route::get('/{compliant}', [ComplaintController::class, 'show'])->name('complaint.show');
