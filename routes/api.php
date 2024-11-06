@@ -14,12 +14,11 @@ Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 });
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::prefix('complaints')->group(function () {
         Route::get('/', [ComplaintController::class, 'index'])->name('complaint.index');
         Route::get('/{compliant}', [ComplaintController::class, 'show'])->name('complaint.show');
         Route::get('/status', [StatusController::class, 'index'])->name('status.index');
         Route::post('/{compliant}', [ComplaintController::class, 'discard'])->name('complaint.discard');
     });
-
 });
