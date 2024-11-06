@@ -24,9 +24,12 @@ class SuspectResource extends JsonResource
             ],
             'notes' => $this->notes,
             'process_info' => new ProcessInfoResource($this->processInfo),
-            'actions' => $this->organizations->map(function ($item) {
-                return $item->pivot->where('organization_id', 1)->first()->relation_type;
-            })->first()
+            'actions' => auth()->user()->organization_id ? $this->organizations->map(function ($item) {
+                return $item->pivot
+                    ->where('organization_id', auth()->user()->organization_id)
+                    ->where('suspect_id', $this->id)
+                    ->first()->relation_type;
+            })->first() : 'observer'
         ];
     }
 }

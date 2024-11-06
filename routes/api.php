@@ -28,7 +28,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::post('/{compliant}/confirm', [ComplaintController::class, 'confirm'])->name('complaint.confirm');
     });
 
-    Route::prefix('suspect')->group(function () {
+    Route::prefix('suspects')->group(function () {
         Route::get('/', [SuspectController::class, 'index'])->name('suspect.index');
         Route::get('/{suspect}', [SuspectController::class, 'show'])->name('suspect.show');
         Route::post('/{suspect}/discard', [SuspectController::class, 'discard'])->name('suspect.discard');

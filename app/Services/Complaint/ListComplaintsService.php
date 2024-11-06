@@ -25,6 +25,7 @@ class ListComplaintsService implements Contracts\ListComplaintsServiceContract
             ->orWhereHas('organizations', function ($query){
                 $query->where('organization_id', auth()->user()->organization_id);
             })
+            ->orderBy('id', 'desc')
             ->get();
     }
 }
