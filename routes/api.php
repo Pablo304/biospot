@@ -30,7 +30,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     Route::prefix('suspects')->group(function () {
         Route::get('/', [SuspectController::class, 'index'])->name('suspect.index');
-        Route::post('/', [SuspectController::class, 'store'])->name('suspect.store');
+        Route::post('/', [SuspectController::class, 'storeSuspect'])->name('suspect.store');
         Route::get('/{suspect}', [SuspectController::class, 'show'])->name('suspect.show');
         Route::post('/{suspect}/discard', [SuspectController::class, 'discard'])->name('suspect.discard');
         Route::post('/{suspect}/confirm', [SuspectController::class, 'confirm'])->name('suspect.confirm');

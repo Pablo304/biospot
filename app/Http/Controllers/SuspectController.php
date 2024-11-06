@@ -50,7 +50,7 @@ class SuspectController extends Controller
     }
 
 
-    public function store(CreateSuspectRequest $request, StoreSuspectServiceContract $storeSuspectService)
+    public function storeSuspect(CreateSuspectRequest $request, StoreSuspectServiceContract $storeSuspectService)
     {
         try {
             return self::successResponse(
