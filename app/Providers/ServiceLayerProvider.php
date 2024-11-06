@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Status\Contracts\ListStatusServiceContract;
+use App\Services\Status\ListStatusService;
 use Illuminate\Support\ServiceProvider;
 
 class ServiceLayerProvider extends ServiceProvider
@@ -20,6 +22,7 @@ class ServiceLayerProvider extends ServiceProvider
     public function boot(): void
     {
         $this->bootComplaint();
+        $this->bootStatus();
     }
 
     /**
@@ -31,5 +34,13 @@ class ServiceLayerProvider extends ServiceProvider
             'App\Services\Complaint\Contracts\ListComplaintsServiceContract',
             'App\Services\Complaint\ListComplaintsService'
         );
+    }
+
+    /**
+     * @return void
+     */
+    private function bootStatus(): void
+    {
+        $this->app->bind(ListStatusServiceContract::class, ListStatusService::class);
     }
 }
