@@ -12,6 +12,7 @@ Route::get('/user', function (Request $request) {
 Route::prefix('biospot')->group(function () {
     Route::prefix('complaints')->group(function () {
         Route::get('/', [ComplaintController::class, 'index'])->name('complaint.index');
+        Route::get('/{compliant}', [ComplaintController::class, 'show'])->name('complaint.show');
         Route::get('/status', [StatusController::class, 'index'])->name('status.index');
     });
 
