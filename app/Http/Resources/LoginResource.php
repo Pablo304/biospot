@@ -7,9 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class LoginResource extends JsonResource {
     public function toArray(Request $request): array {
-        return [
-            'access_token' => $this->resource,
-        ];
+        return parent::toArray($request);
     }
 }
 
