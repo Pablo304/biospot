@@ -41,8 +41,7 @@ class SuspectController extends Controller
                 message: ('Suspeita registrada com sucesso.')
             );
         } catch (Exception $exception) {
-//            return self::returnError($exception);
-            return $exception->getMessage();
+            return self::returnError($exception);
         }
     }
 
