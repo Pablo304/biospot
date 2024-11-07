@@ -4,7 +4,11 @@ namespace App\Services\Suspect;
 
 use App\Http\Requests\ConfirmSuspectRequest;
 use App\Models\Suspect\Suspect;
+use App\OrganizationEnum;
 use App\PlagueStatusEnum;
+use App\RelationTypeEnum;
+use App\Services\OrganizationPlague\Contract\CreateOrganizationPlagueServiceContract;
+use App\Services\OrganizationPlague\CreateOrganizationPlagueService;
 use App\Services\Plague\Contracts\CreatePlagueServiceContract;
 use App\StatusEnum;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -15,7 +19,8 @@ class ConfirmSuspectService implements Contracts\ConfirmSuspectServiceContract
 
     public function __construct(
         private readonly Suspect                     $suspect,
-        private readonly CreatePlagueServiceContract $createPlagueService
+        private readonly CreatePlagueServiceContract $createPlagueService,
+        private readonly CreateOrganizationPlagueServiceContract $createOrganizationPlagueService
     )
     {
     }
@@ -40,6 +45,12 @@ class ConfirmSuspectService implements Contracts\ConfirmSuspectServiceContract
                 'suspect_id' => $suspect->id,
                 'process_info_id' => $suspect->processInfo->id,
                 'plague_status_id' => PlagueStatusEnum::ACTIVE,
+            ]);
+
+            $this->createOrganizationPlagueService->execute([
+                'plague_id' => $suspect->id,
+                'organization_id' => OrganizationEnum::EMBRAPA,
+                'relation_type' => 'executor'
             ]);
 
 

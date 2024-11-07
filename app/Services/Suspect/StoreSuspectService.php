@@ -4,9 +4,12 @@ namespace App\Services\Suspect;
 
 use App\Models\Complaint;
 use App\Models\ComplaintOrganization;
+use App\Models\OrganizationSuspect;
 use App\Models\ProcessInfo;
 use App\OrganizationEnum;
+use App\RelationTypeEnum;
 use App\Services\Address\Contracts\CreateAddressServiceContract;
+use App\Services\OrganizationPlague\Contract\CreateOrganizationPlagueServiceContract;
 use App\Services\Suspect\Contracts\CreateSuspectServiceContract;
 use App\Services\Suspect\Contracts\StoreSuspectServiceContract;
 use App\StatusEnum;
@@ -18,7 +21,8 @@ class StoreSuspectService implements StoreSuspectServiceContract
     public function __construct(
         private readonly ProcessInfo                  $processInfo,
         private readonly CreateAddressServiceContract $createAddressService,
-        private readonly CreateSuspectServiceContract $createSuspectService
+        private readonly CreateSuspectServiceContract $createSuspectService,
+        private readonly OrganizationSuspect $organizationSuspect
     )
     {
     }
@@ -40,6 +44,18 @@ class StoreSuspectService implements StoreSuspectServiceContract
                 'status_id' => StatusEnum::IN_PROGRESS,
                 'process_info_id' => $processInfo->id,
                 'notes' => $request['description']
+            ]);
+
+            $this->organizationSuspect->create([
+               'suspect_id' => $suspect->id,
+               'organization_id' => OrganizationEnum::ADERR,
+               'relation_type' => 'observer'
+            ]);
+
+            $this->organizationSuspect->create([
+                'suspect_id' => $suspect->id,
+                'organization_id' => OrganizationEnum::EMBRAPA,
+                'relation_type' => 'executor'
             ]);
 
             DB::commit();
