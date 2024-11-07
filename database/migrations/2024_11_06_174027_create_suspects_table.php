@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('suspects', function (Blueprint $table) {
             $table->id();
             $table->string('notes')->nullable()->default(null);
-            $table->foreignId('complaint_id');
+            $table->foreignId('complaint_id')->nullable();
             $table->foreignId('status_id');
             $table->foreignId('process_info_id');
             $table->timestamps();

@@ -29,9 +29,11 @@ use App\Services\Suspect\Contracts\ConfirmSuspectServiceContract;
 use App\Services\Suspect\Contracts\CreateSuspectServiceContract;
 use App\Services\Suspect\Contracts\DiscardSuspectServiceContract;
 use App\Services\Suspect\Contracts\ListSuspectServiceContract;
+use App\Services\Suspect\Contracts\StoreSuspectServiceContract;
 use App\Services\Suspect\CreateSuspectService;
 use App\Services\Suspect\DiscardSuspectService;
 use App\Services\Suspect\ListSuspectService;
+use App\Services\Suspect\StoreSuspectService;
 use Illuminate\Support\ServiceProvider;
 
 class ServiceLayerProvider extends ServiceProvider
@@ -105,6 +107,7 @@ class ServiceLayerProvider extends ServiceProvider
         $this->app->bind(ConfirmSuspectServiceContract::class, ConfirmSuspectService::class);
         $this->app->bind(DiscardSuspectServiceContract::class, DiscardSuspectService::class);
         $this->app->bind(ListSuspectServiceContract::class, ListSuspectService::class);
+        $this->app->bind(StoreSuspectServiceContract::class, StoreSuspectService::class);
     }
 
     /**
