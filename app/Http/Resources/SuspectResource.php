@@ -16,7 +16,7 @@ class SuspectResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'complaint' => $this->complaint ? new ComplaintResource($this->complaint) : null,
+            'complaint' => new ComplaintResource($this->complaint),
             'status' => [
                 'name' => $this->status->name,
                 'slug' => $this->status->slug,
@@ -28,7 +28,7 @@ class SuspectResource extends JsonResource
                 return $item->pivot
                     ->where('organization_id', auth()->user()->organization_id)
                     ->where('suspect_id', $this->id)
-                    ->first()->relation_type;
+                    ->first()?->relation_type;
             })->first() : 'observer'
         ];
     }
