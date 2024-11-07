@@ -14,12 +14,9 @@ class SuspectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        dd($this);
         return [
             'id' => $this->id,
-            'complaint' => [
-                'id' => $this->complaint->id,
-            ],
+            'complaint' => new ComplaintResource($this->complaint),
             'status' => [
                 'name' => $this->status->name,
                 'slug' => $this->status->slug,
