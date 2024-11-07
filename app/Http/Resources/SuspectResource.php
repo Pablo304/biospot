@@ -28,7 +28,7 @@ class SuspectResource extends JsonResource
                 return $item->pivot
                     ->where('organization_id', auth()->user()->organization_id)
                     ->where('suspect_id', $this->id)
-                    ->first()?->relation_type;
+                    ->first()->relation_type;
             })->first() : 'observer'
         ];
     }
