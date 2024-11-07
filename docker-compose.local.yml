@@ -90,6 +90,21 @@ services:
       test: [ "CMD", "redis-cli", "ping" ]
       retries: 3
       timeout: 5s
+  ngrok:
+    image: wernight/ngrok
+    restart: unless-stopped
+    container_name: ngrok
+    environment:
+      NGROK_AUTHTOKEN: "${NGROK_AUTHTOKEN}"
+      NGROK_REGION: "us"
+      NGROK_PORT: "nginx:80"
+    ports:
+      - "4040:4040" # Porta para acessar a interface web do ngrok (dashboard)
+    networks:
+      - api-network
+    depends_on:
+      - nginx
+    command: ngrok http --domain=enormous-humpback-frankly.ngrok-free.app nginx:80
   pgsql:
     image: 'postgis/postgis:14-master'
     container_name: api_pgsql

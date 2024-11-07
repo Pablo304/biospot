@@ -36,6 +36,8 @@ use App\Services\Suspect\CreateSuspectService;
 use App\Services\Suspect\DiscardSuspectService;
 use App\Services\Suspect\ListSuspectService;
 use App\Services\Suspect\StoreSuspectService;
+use App\Services\Whatsapp\Contracts\WhatsappServiceContract;
+use App\Services\Whatsapp\WhatsappService;
 use Illuminate\Support\ServiceProvider;
 
 class ServiceLayerProvider extends ServiceProvider
@@ -60,6 +62,7 @@ class ServiceLayerProvider extends ServiceProvider
         $this->bootSuspect();
         $this->bootAddress();
         $this->bootProcessInfo();
+        $this->bootWhatsapp();
     }
 
     /**
@@ -127,5 +130,13 @@ class ServiceLayerProvider extends ServiceProvider
     private function bootProcessInfo(): void
     {
         $this->app->bind(CreateProcessInfoServiceContract::class, CreateProcessInfoService::class);
+    }
+
+    /**
+     * @return void
+     */
+    private function bootWhatsapp(): void
+    {
+        $this->app->bind(WhatsappServiceContract::class, WhatsappService::class);
     }
 }

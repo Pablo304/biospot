@@ -35,6 +35,13 @@ class UsersSeeder extends Seeder
                 'organization_id' => null,
                 'role_slug' => 'citizen'
             ],
+            [
+                'name' => 'Usuário Whatsapp',
+                'email' => 'whatsapp@teste.com',
+                'password' => '123456',
+                'organization_id' => null,
+                'role_slug' => 'citizen'
+            ]
         ];
 
         collect($data)->each(function ($item) {

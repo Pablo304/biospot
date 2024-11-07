@@ -7,6 +7,7 @@ use App\Http\Controllers\PlagueStatusController;
 use App\Http\Controllers\PlagueTypeController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SuspectController;
+use App\Http\Controllers\WhatsappController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,4 +46,5 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::get('/plague-status', [PlagueStatusController::class, 'index']);
     });
     Route::get('/status', [StatusController::class, 'index'])->name('status.index');
+    Route::post('receive', [WhatsappController::class, 'receive'])->withoutMiddleware('auth:sanctum')->name('receive.whatsapp');
 });

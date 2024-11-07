@@ -34,5 +34,14 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'whatsapp' => [
+        'token' => env('TECNOSPEED_TOKEN'),
+        'instance_token' => env('TECNOSPEED_INSTANCE'),
+        'base_url' => env('TECNOSPEED_BASE_URL'),
+        'send_url' => env('TECNOSPEED_SEND_URL'),
+        'enabled' => env('SEND_WHATSAPP', false),
+        'security_token' => env('SECURITY_TOKEN', ''),
+        'expires_limit' => now()->addMinutes(intval(env('CHAT_EXPIRES_LIMIT', 60)))
+    ]
 
 ];

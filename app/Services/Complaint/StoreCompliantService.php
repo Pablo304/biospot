@@ -24,7 +24,7 @@ class StoreCompliantService implements Contracts\StoreCompliantServiceContract
     /**
      * @inheritDoc
      */
-    public function execute(array $data): mixed
+    public function execute(array $data, ?int $user_id = null): mixed
     {
         $addressData = $data['address'];
         try {
@@ -33,7 +33,7 @@ class StoreCompliantService implements Contracts\StoreCompliantServiceContract
             $address = $this->createAddressService->execute($addressData);
             $processInfo = $this->processInfo->create([
                 'description' => $data['description'],
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->user()->id ?? $user_id,
                 'address_id' => $address->id
             ]);
 
