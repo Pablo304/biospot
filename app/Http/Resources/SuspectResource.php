@@ -16,7 +16,9 @@ class SuspectResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'complaint' => new ComplaintResource($this->complaint),
+            'complaint' => [
+                'id' => $this->complaint->id,
+            ],
             'status' => [
                 'name' => $this->status->name,
                 'slug' => $this->status->slug,

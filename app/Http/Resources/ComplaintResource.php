@@ -29,7 +29,7 @@ class ComplaintResource extends JsonResource
                 return $item->pivot
                     ->where('organization_id', auth()->user()->organization_id)
                     ->where('complaint_id', $this->id)
-                    ->first()?->relation_type;
+                    ->first()->relation_type;
             })->first() : 'observer'
         ];
     }
