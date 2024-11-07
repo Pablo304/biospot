@@ -9,6 +9,7 @@
 - Docker
 - PostgreSQL
 - Redis
+- Integração com API para Whatsapp Tecnospeed
 
 ## Instalação inicial
 
