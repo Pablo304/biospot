@@ -1,4 +1,4 @@
-# Biospot
+# BioSpot - API
 
 ## Descrição do Projeto
 <b>BioSpot</b> é uma aplicação desenvolvida para facilitar a integração da gestão pública no monitoramento e combate a pragas agrícolas. A plataforma permite o registro de denúncias, análise e mapeamento de focos de pragas, auxiliando na tomada de decisão e resposta rápida contra ameaças agrícolas.
