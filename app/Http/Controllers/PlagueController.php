@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePlagueRequest;
 use App\Http\Resources\PlagueResource;
 use App\Models\Plague\OrganizationPlague;
+use App\Models\Plague\Plague;
 use App\OrganizationEnum;
 use App\PlagueStatusEnum;
 use App\Services\Address\Contracts\CreateAddressServiceContract;
@@ -24,6 +25,18 @@ class PlagueController extends Controller
             return self::successResponse(
                 data: PlagueResource::collection($listPlagueService->execute()),
                 message: ('Pragas encontradas com sucesso.')
+            );
+        } catch (\Exception $exception) {
+            return self::internalServerErrorResponse($exception);
+        }
+    }
+
+    public function show(Plague $plague)
+    {
+        try {
+            return self::successResponse(
+                data: new PlagueResource($plague),
+                message: 'Pragas encontradas com sucesso.'
             );
         } catch (\Exception $exception) {
             return self::internalServerErrorResponse($exception);
