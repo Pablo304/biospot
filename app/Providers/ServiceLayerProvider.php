@@ -9,6 +9,8 @@ use App\Services\Complaint\Contracts\ConfirmComplaintServiceContract;
 use App\Services\Complaint\Contracts\DiscardComplaintServiceContract;
 use App\Services\Complaint\Contracts\StoreCompliantServiceContract;
 use App\Services\Complaint\DiscardComplaintService;
+use App\Services\OrganizationPlague\Contract\CreateOrganizationPlagueServiceContract;
+use App\Services\OrganizationPlague\CreateOrganizationPlagueService;
 use App\Services\Plague\Contracts\CreatePlagueServiceContract;
 use App\Services\Complaint\StoreCompliantService;
 use App\Services\Plague\Contracts\ListPlagueServiceContract;
@@ -96,6 +98,7 @@ class ServiceLayerProvider extends ServiceProvider
         $this->app->bind(CreatePlagueServiceContract::class, CreatePlagueService::class);
         $this->app->bind(ListPlagueServiceContract::class, ListPlagueService::class);
         $this->app->bind(ResolvePlagueServiceContract::class, ResolvePlagueService::class);
+        $this->app->bind(CreateOrganizationPlagueServiceContract::class, CreateOrganizationPlagueService::class);
     }
 
     /**
