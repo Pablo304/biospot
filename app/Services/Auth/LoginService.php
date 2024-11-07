@@ -26,7 +26,8 @@ class LoginService implements Contract\LoginServiceContract
         return [
             'name' => $user->name,
             'access_token' => $accessToken->plainTextToken,
-            'abilities' => $accessToken->accessToken->abilities
+            'abilities' => $accessToken->accessToken->abilities,
+            'role_slug' => $user->role_slug,
         ];
 
     }

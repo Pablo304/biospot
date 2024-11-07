@@ -17,12 +17,12 @@ class PlagueStatusSeeder extends Seeder
             [
                 'name' => 'Ativo',
                 'slug' => 'active',
-                'color' => '#00ff00',
+                'color' => '#ff0000',
             ],
             [
                 'name' => 'Resolvido',
                 'slug' => 'resolved',
-                'color' => '#ff0000',
+                'color' => '#00ff00',
             ],
         ];
 

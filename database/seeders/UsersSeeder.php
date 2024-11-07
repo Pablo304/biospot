@@ -18,19 +18,22 @@ class UsersSeeder extends Seeder
                 'name' => 'Aderr',
                 'email' => 'aderr@teste.com',
                 'password' => '123456',
-                'organization_id' => 1
+                'organization_id' => 1,
+                'role_slug' => 'fiscal'
             ],
             [
                 'name' => 'Embrapa',
                 'email' => 'embrapa@teste.com',
                 'password' => '123456',
-                'organization_id' => 2
+                'organization_id' => 2,
+                'role_slug' => 'specialist'
             ],
             [
                 'name' => 'denym',
                 'email' => 'deny@teste.com',
                 'password' => '123456',
-                'organization_id' => null
+                'organization_id' => null,
+                'role_slug' => 'citizen'
             ],
         ];
 
