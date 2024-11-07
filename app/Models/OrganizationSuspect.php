@@ -9,7 +9,7 @@ class OrganizationSuspect extends Model
     protected $table = 'organization_suspects';
 
     protected $fillable = [
-        'complaint_id',
+        'suspect_id',
         'organization_id',
         'relation_type',
     ];
