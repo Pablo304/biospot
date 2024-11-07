@@ -66,7 +66,7 @@ class PlagueController extends Controller
 
             OrganizationPlague::create([
                 'plague_id' => $plague->id,
-                'organization_id' => OrganizationEnum::ADERR,
+                'organization_id' => OrganizationEnum::EMBRAPA,
                 'relation_type' => 'executor'
             ]);
             DB::commit();

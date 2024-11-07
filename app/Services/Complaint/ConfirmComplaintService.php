@@ -4,6 +4,8 @@ namespace App\Services\Complaint;
 
 use App\Http\Requests\ConfirmComplaintRequest;
 use App\Models\Complaint;
+use App\Models\ComplaintOrganization;
+use App\OrganizationEnum;
 use App\Services\Complaint\Contracts\ConfirmComplaintServiceContract;
 use App\Services\Suspect\Contracts\CreateSuspectServiceContract;
 use App\StatusEnum;
@@ -41,6 +43,17 @@ class ConfirmComplaintService implements Contracts\ConfirmComplaintServiceContra
                 'notes' => $request->validated()['notes']
             ]);
 
+            ComplaintOrganization::create([
+                'complaint_id' => $compliant->id,
+                'organization_id' => OrganizationEnum::ADERR,
+                'relation_type' => 'observer'
+            ]);
+
+            ComplaintOrganization::create([
+                'complaint_id' => $compliant->id,
+                'organization_id' => OrganizationEnum::EMBRAPA,
+                'relation_type' => 'executor'
+            ]);
 
             DB::commit();
             return $suspect;
@@ -49,7 +62,6 @@ class ConfirmComplaintService implements Contracts\ConfirmComplaintServiceContra
             throw new ModelNotFoundException(__('messages.errors.model_not_found'));
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception->getMessage());
             throw $exception;
         }
     }
