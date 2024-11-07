@@ -20,5 +20,7 @@
 5. Entre no diretório do projeto: ```cd biospot```
 6. Instale as dependências: ```make install```
 7. Irá ser instalado todo o ambiente necessário para rodar o projeto
-8. Grande parte das configurações podem ser customizadas a partir de variáveis no arquvi ```.env```
+8. Execute o comando ```make migrate``` para criar a tabela de banco de dados
+9. Execute ```docker exec -it php-fpm /bin/bash``` e ```pa db:seed````para inserir os dados iniciais necessários
+10. Grande parte das configurações podem ser customizadas a partir de variáveis no arquvi ```.env```
 
